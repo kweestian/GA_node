@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var bodyParser = require('body-parser');
 
-// this npm package will make retrieving from the api  much cleaner
+// this npm package will make retrieving from the api much cleaner
 var omdbApi = require('omdb-client');
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -46,33 +46,15 @@ app.get('/favorites', function(req, res){
   res.send(data);
 });
 
-app.get('/addToFavorites', function(req, res){
-  if(!req.query) {
+app.post('/favorites', function(req, res){
+  if(!req.body) {
     res.send("Error");
-    return
   } else {
     var data = JSON.parse(fs.readFileSync('./data.json'));
-    data.push(req.query);
+    data.push(req.body);
     fs.writeFile('./data.json', JSON.stringify(data));
     res.setHeader('Content-Type', 'application/json');
-    res.send(data);
   }
-});
-
-app.get('/result', function(req, res){
-
-  var params = {
-    title: "Terminator"
-  }
-
-  omdbApi.get(params, function(err, data) {
-    if (!err) {
-      res.send(data);
-    } else {
-      console.log(err);
-      res.send("Error");
-    }
-  });
 });
 
 app.listen(3000, function(){

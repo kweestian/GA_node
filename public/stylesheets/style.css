@@ -5,3 +5,9 @@
   font-size:3.5em;
   border-radius:8px;
 }
+
+li:hover {
+  color: blue;
+  cursor: pointer;
+  font-size: 20px;
+}
