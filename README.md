@@ -5,6 +5,6 @@
 
 
 run :
-```npm install
+```npm install ```
 
-node server.js```
+```node server.js ```
